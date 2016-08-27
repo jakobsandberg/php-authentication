@@ -1,0 +1,34 @@
+{% extends "Layout.html" %}
+{% block content %}
+    <h1>Registration</h1>
+
+    {% if feedback is defined %}
+        {% for message in feedback %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input id="name" name="name" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input id="email" name="email" type="email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="emailRepeat">Repeat Email:</label>
+            <input id="emailRepeat" name="emailRepeat" type="email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input id="password" name="password" type="password" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="passwordRepeat">Repeat Password:</label>
+            <input id="passwordRepeat" name="passwordRepeat" type="password" class="form-control">
+        </div>
+        <input type="submit" class="btn btn-primary">
+    </form>
+{% endblock %}
