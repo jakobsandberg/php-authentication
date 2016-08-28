@@ -16,7 +16,7 @@ $injector->define('Http\HttpRequest', [
 
 $injector->define('Mustache_Engine', [
     ':options' => [
-        'loader' => new Mustache_Loader_FilesystemLoader(dirname(__DIR__) . '/templates', [
+        'loader' => new Mustache_Loader_FilesystemLoader(dirname(__DIR__) . '/src/View', [
             'extension' => '.html',
         ]),
     ],
@@ -33,7 +33,7 @@ $injector->alias('Http\Response', 'Http\HttpResponse');
 $injector->share('Http\HttpResponse');
 
 $injector->delegate('Twig_Environment', function() use ($injector) {
-    $loader = new Twig_Loader_Filesystem(dirname(__DIR__) . '/templates');
+    $loader = new Twig_Loader_Filesystem(dirname(__DIR__) . '/src/View');
     $twig = new Twig_Environment($loader);
     return $twig;
 });
