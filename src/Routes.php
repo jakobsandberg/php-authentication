@@ -3,7 +3,7 @@
 namespace Example;
 
 return [
-    ['GET', '/', ['Example\Controllers\IndexController', 'show']],
+    ['GET', '/', ['Example\Controllers\IndexController', 'index']],
 
     ['GET', '/login', ['Example\Controllers\LoginController', 'index']],
     ['POST', '/login', ['Example\Controllers\LoginController', 'login']],

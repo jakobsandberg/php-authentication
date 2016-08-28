@@ -2,13 +2,25 @@
 
 namespace Example\Controllers;
 
+use Http\Request;
+use Http\Response;
+use Example\Core\Renderer;
 use Example\Core\Session;
-use Example\Core\Text;
 
 class Controller
 {
-    public function __construct()
-    {
+    protected $request;
+    protected $response;
+    protected $renderer;
+
+    public function __construct(
+        Request $request,
+        Response $response,
+        Renderer $renderer
+    ) {
+        $this->request = $request;
+        $this->response = $response;
+        $this->renderer = $renderer;
         Session::start();
     }
 }
