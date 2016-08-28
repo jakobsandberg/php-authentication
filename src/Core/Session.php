@@ -26,15 +26,11 @@ class Session
         if (isset($_SESSION[$key])) {
             return $_SESSION[$key];
         }
+        return false;
     }
 
     public static function end()
     {
         session_destroy();
-    }
-
-    public static function isLoggedIn()
-    {
-        return(self::get("isLoggedIn") ?: false);
     }
 }

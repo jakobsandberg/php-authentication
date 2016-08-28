@@ -9,7 +9,7 @@ class Config
     public static function get($key)
     {
         if (!self::$config) {
-            $config_file = '../src/Config/ConfigSettings.php';
+            $config_file = '../src/Config/Settings.php';
             if (!file_exists($config_file)) {
                 return false;
             }

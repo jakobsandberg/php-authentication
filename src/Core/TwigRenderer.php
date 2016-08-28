@@ -17,7 +17,7 @@ class TwigRenderer implements Renderer
     {
         $data = array_merge($data, [
             'GLOBAL' => Text::all(),
-            'isLoggedIn' => Session::isLoggedIn()
+            'isLoggedIn' => Session::get("isLoggedIn")
         ]);
         return $this->engine->render("$template.html", $data);
     }

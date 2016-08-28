@@ -24,7 +24,7 @@ class Redirect
 
     public static function toHomeIfLoggedIn()
     {
-        if (Session::isLoggedIn()) {
+        if (Session::get("isLoggedIn")) {
             self::home();
         }
     }
