@@ -31,17 +31,15 @@ class LoginController extends Controller
     public function index()
     {
         Redirect::toHomeIfLoggedIn();
-        $html = $this->renderer->render('Login');
+        $html = $this->renderer->render('Login', $this->data);
         $this->response->setContent($html);
     }
 
     public function login()
     {
         if (!LoginModel::login()) {
-            $data = [
-                'feedback' => Session::get("feedback")
-            ];
-            $html = $this->renderer->render('Login', $data);
+            $this->data['feedback'] = Session::get("feedback");
+            $html = $this->renderer->render('Login', $this->data);
             $this->response->setContent($html);
         } else {
             Redirect::home();

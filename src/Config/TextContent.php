@@ -3,6 +3,7 @@
 namespace Example\Config;
 
 return [
+    "TITLE" => "PHP Authentication",
     "UNKNOWN_ERROR" => "An unknown error has occured.",
     "REGISTRATION_SUCCESS" => "You have successfully registered. Please check
                               your email for a confirmation link.",

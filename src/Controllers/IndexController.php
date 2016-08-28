@@ -5,6 +5,7 @@ namespace Example\Controllers;
 use Http\Request;
 use Http\Response;
 use Example\Core\Session;
+use Example\Core\Text;
 use Example\Template\FrontendRenderer;
 use Example\Controllers\Controller;
 
@@ -27,10 +28,7 @@ class IndexController extends Controller
 
     public function show()
     {
-        $data = [
-            'isLoggedIn' => Session::isLoggedIn()
-        ];
-        $html = $this->renderer->render('Homepage', $data);
+        $html = $this->renderer->render('Homepage', $this->data);
         $this->response->setContent($html);
     }
 }

@@ -27,13 +27,6 @@ class LoginModel
 
         $user = self::fetchUser($email);
         if (!$user) {
-            // Remove both Session::add methods, they are just for testing
-            Session::add("feedback", "Counter: " . Session::get("falseEmailCounter"));
-            Session::add("feedback", "Timestamp: " . Session::get("lastFailedLogin"));
-            return false;
-        }
-
-        if (!self::isVerified($user["isVer"])) {
             return false;
         }
 
@@ -41,7 +34,11 @@ class LoginModel
             return false;
         }
 
-        if (!self::verifyPassword($password, $user["password"])) {
+        if (!self::isVerified($user["isVer"])) {
+            return false;
+        }
+
+        if (!self::verifyPassword($email, $password, $user["password"])) {
             return false;
         }
 
@@ -112,12 +109,12 @@ class LoginModel
         ]);
         $row = $query->fetch();
         if (!$row) {
-            self::incorrectEmailLog();
+            self::updateSessionLog();
             Session::add("feedback", Text::get("LOGIN_INCORRECT"));
             return false;
         }
 
-        self::resetIncorrectEmailLog();
+        self::updateSessionLog($reset = true);
 
         $user = [
             "email" => $row->email,
@@ -131,29 +128,22 @@ class LoginModel
         return $user;
     }
 
-    public static function incorrectEmailLog()
-    {
-        self::incrementFalseEmailCounter();
-        self::timestampFalseEmail();
-    }
-
-    public static function incrementFalseEmailCounter()
+    public static function updateSessionLog($reset = false)
     {
         if (!Session::get("falseEmailCounter")) {
             Session::set("falseEmailCounter", 0);
         }
-        Session::set("falseEmailCounter", Session::get("falseEmailCounter") + 1);
-    }
 
-    public static function timestampFalseEmail()
-    {
-        Session::set("lastFailedLogin", time());
-    }
+        if ($reset) {
+            $counter = 0;
+            $time = "";
+        } else {
+            $counter = Session::get("falseEmailCounter") + 1;
+            $time = time();
+        }
 
-    public static function resetIncorrectEmailLog()
-    {
-        Session::set("falseEmailCounter", 0);
-        Session::set("lastFailedLogin", "");
+        Session::set("falseEmailCounter", $counter);
+        Session::set("lastFailedLogin", $time);
     }
 
     public static function isVerified($isVer)
@@ -166,15 +156,43 @@ class LoginModel
         return true;
     }
 
-    public static function verifyPassword($password, $passwordDatabase)
+    public static function verifyPassword($email, $password, $passwordDatabase)
     {
         if (!password_verify($password, $passwordDatabase)) {
-            // add failed attempt to database
+
+            self::updateDatabaseLog($email);
+
             Session::add("feedback", Text::get("LOGIN_INCORRECT"));
             return false;
         }
 
+        self::updateDatabaseLog($email, $reset = true);
         return true;
+    }
+
+    public static function updateDatabaseLog($email, $reset = false)
+    {
+        $connection = (new Database)->get();
+
+        if ($reset) {
+            $newTime = null;
+            $sql = "UPDATE users
+                    SET failedLoginCounter = 0,
+                        failedLoginTimestamp = :failedLoginTimestamp
+                    WHERE email=:email";
+        } else {
+            $newTime = time();
+            $sql = "UPDATE users
+                    SET failedLoginCounter = failedLoginCounter + 1,
+                        failedLoginTimestamp = :failedLoginTimestamp
+                    WHERE email=:email";
+        }
+
+        $query = $connection->prepare($sql);
+        $query->execute([
+            ':email' => $email,
+            ':failedLoginTimestamp' => $newTime
+        ]);
     }
 
     public static function logout()

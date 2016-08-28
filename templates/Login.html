@@ -1,22 +1,26 @@
 {% extends "Layout.html" %}
 {% block content %}
-    <h1>Login</h1>
+    <div id="authentication-content" class="row">
+        <h1>Login</h1>
 
-    {% if feedback is defined %}
-        {% for message in feedback %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    {% endif %}
-    
-    <form method="post">
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input id="email" name="email" type="email" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input id="password" name="password" type="password" class="form-control">
-        </div>
-        <input type="submit">
-    </form>
+        {% if feedback is defined %}
+            {% for message in feedback %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input id="email" name="email" type="email" placeholder="Email"
+                       class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input id="password" name="password" type="password"
+                       placeholder="Password" class="form-control">
+            </div>
+            <input type="submit" class="btn btn-primary float-right">
+        </form>
+    </div>
 {% endblock %}

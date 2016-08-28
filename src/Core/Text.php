@@ -6,7 +6,7 @@ class Text
 {
     private static $text;
 
-    public static function get($key, $data = null)
+    public static function get($key)
     {
         if (!$key) {
             return null;
@@ -21,5 +21,14 @@ class Text
         }
 
         return self::$text[$key];
+    }
+
+    public static function all()
+    {
+        if (!self::$text) {
+            self::$text = require("../src/Config/TextContent.php");
+        }
+
+        return self::$text;
     }
 }

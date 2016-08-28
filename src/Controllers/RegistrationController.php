@@ -33,17 +33,20 @@ class RegistrationController extends Controller
     public function index()
     {
         Redirect::toHomeIfLoggedIn();
-        $html = $this->renderer->render('Registration');
+        $html = $this->renderer->render('Registration', $this->data);
         $this->response->setContent($html);
     }
 
     public function register()
     {
         $success = RegistrationModel::register();
-        $data = [
-            'feedback' => Session::get("feedback")
-        ];
-        $html = $this->renderer->render('Registration', $data);
+        if ($success) {
+            // different view for success
+        } else {
+            // different view for fail
+        }
+        $this->data['feedback'] = Session::get("feedback");
+        $html = $this->renderer->render('Registration', $this->data);
         $this->response->setContent($html);
     }
 
@@ -55,10 +58,8 @@ class RegistrationController extends Controller
         if ($success) {
             Redirect::home();
         } else {
-            $data = [
-                'feedback' => Session::get("feedback")
-            ];
-            $html = $this->renderer->render('Registration', $data);
+            $this->data['feedback'] = Session::get("feedback");
+            $html = $this->renderer->render('Registration', $this->data);
             $this->response->setContent($html);
         }
     }
