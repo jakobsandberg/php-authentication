@@ -1,6 +1,6 @@
 <?php
 
-namespace Example\Settings;
+namespace Example\Config;
 
 return [
     "TITLE" => "PHP Authentication",
