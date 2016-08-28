@@ -13,7 +13,7 @@ class Text
         }
 
         if (!self::$text) {
-            self::$text = require("../src/Config/TextContent.php");
+            self::$text = require("../src/Settings/TextContent.php");
         }
 
         if (!array_key_exists($key, self::$text)) {
@@ -26,7 +26,7 @@ class Text
     public static function all()
     {
         if (!self::$text) {
-            self::$text = require("../src/Config/TextContent.php");
+            self::$text = require("../src/Settings/TextContent.php");
         }
 
         return self::$text;
