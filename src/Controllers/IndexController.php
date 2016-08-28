@@ -6,7 +6,7 @@ use Http\Request;
 use Http\Response;
 use Example\Core\Session;
 use Example\Core\Text;
-use Example\Template\Renderer;
+use Example\Core\Renderer;
 use Example\Controllers\Controller;
 
 class IndexController extends Controller

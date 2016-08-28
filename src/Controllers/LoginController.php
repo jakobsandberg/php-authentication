@@ -4,7 +4,7 @@ namespace Example\Controllers;
 
 use Http\Request;
 use Http\Response;
-use Example\Template\Renderer;
+use Example\Core\Renderer;
 use Example\Core\Redirect;
 use Example\Core\Session;
 use Example\Models\LoginModel;

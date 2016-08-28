@@ -3,8 +3,7 @@
 $injector = new \Auryn\Injector;
 
 $injector->alias('Http\Request', 'Http\HttpRequest');
-$injector->alias('Example\Template\Renderer', 'Example\Template\TwigRenderer');
-$injector->alias('Example\Template\FrontendRenderer', 'Example\Template\FrontendTwigRenderer');
+$injector->alias('Example\Core\Renderer', 'Example\Core\TwigRenderer');
 $injector->share('Http\HttpRequest');
 $injector->define('Http\HttpRequest', [
     ':get' => $_GET,
