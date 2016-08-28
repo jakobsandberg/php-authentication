@@ -38,7 +38,4 @@ $injector->delegate('Twig_Environment', function() use ($injector) {
     return $twig;
 });
 
-$injector->alias('Example\Menu\MenuReader', 'Example\Menu\ArrayMenuReader');
-$injector->share('Example\Menu\ArrayMenuReader');
-
 return $injector;

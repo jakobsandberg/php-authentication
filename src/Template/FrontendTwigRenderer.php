@@ -2,25 +2,18 @@
 
 namespace Example\Template;
 
-use Example\Menu\MenuReader;
-
-class FrontendTwigRenderer implements FrontendRenderer
+class FrontendTwigRenderer implements Renderer
 {
     private $renderer;
     private $menuReader;
 
-    public function __construct(Renderer $renderer, MenuReader $menuReader)
+    public function __construct(Renderer $renderer)
     {
         $this->renderer = $renderer;
-        $this->menuReader = $menuReader;
     }
 
     public function render($template, $data = [])
     {
-        $data = array_merge($data, [
-            'menuItems' => $this->menuReader->readMenu(),
-            'sessionItems' => $_SESSION
-        ]);
         return $this->renderer->render($template, $data);
     }
 }

@@ -5,7 +5,9 @@
 
         {% if feedback is defined %}
             {% for message in feedback %}
-                <p>{{ message }}</p>
+                <div class="alert alert-danger" role="alert">
+                    <p>{{ message }}</p>
+                </div>
             {% endfor %}
         {% endif %}
 

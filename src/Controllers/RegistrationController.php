@@ -4,7 +4,7 @@ namespace Example\Controllers;
 
 use Http\Request;
 use Http\Response;
-use Example\Template\FrontendRenderer;
+use Example\Template\Renderer;
 use Example\Core\Redirect;
 use Example\Core\Session;
 use Example\Core\Text;
@@ -21,7 +21,7 @@ class RegistrationController extends Controller
     public function __construct(
         Request $request,
         Response $response,
-        FrontendRenderer $renderer
+        Renderer $renderer
     )
     {
         $this->request = $request;

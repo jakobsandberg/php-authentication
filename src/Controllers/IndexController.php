@@ -6,7 +6,7 @@ use Http\Request;
 use Http\Response;
 use Example\Core\Session;
 use Example\Core\Text;
-use Example\Template\FrontendRenderer;
+use Example\Template\Renderer;
 use Example\Controllers\Controller;
 
 class IndexController extends Controller
@@ -18,7 +18,7 @@ class IndexController extends Controller
     public function __construct(
         Request $request,
         Response $response,
-        FrontendRenderer $renderer
+        Renderer $renderer
     ) {
         $this->request = $request;
         $this->response = $response;
