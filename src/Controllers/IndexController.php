@@ -28,7 +28,7 @@ class IndexController extends Controller
 
     public function show()
     {
-        $html = $this->renderer->render('Homepage', $this->data);
+        $html = $this->renderer->render('Index');
         $this->response->setContent($html);
     }
 }
