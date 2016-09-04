@@ -8,7 +8,7 @@ return [
     'DB_TYPE' => 'mysql',
     'DB_HOST' => 'kravindb.ccbkawsqba3q.us-east-1.rds.amazonaws.com',
     'DB_NAME' => 'test',
-    'DB_USER' => 'admin',
+    'DB_USER' => 'admin', 
     'DB_PASS' => 'GoBears2311',
     'DB_PORT' => '3306',
     'DB_CHARSET' => 'utf8',
