@@ -11,7 +11,6 @@
 * Write clear and concise comments on all code
 * Write a good readme
 * Do testing, give testing files in repo
-* Consider this: https://www.quora.com/What-do-employers-like-to-see-in-someones-GitHub-account
 
 ## Minor tasks
 
